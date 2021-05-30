@@ -9,10 +9,7 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
       t.integer :sp_a
       t.integer :sp_d
       t.integer :spd
-      t.string :move1
-      t.string :move2
-      t.string :move3
-      t.string :move4
+      t.string :moves
     end
   end
 end

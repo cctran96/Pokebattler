@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 const img = "https://static.wixstatic.com/media/2e0667_94fcff8a7c1a42358312ec303dac07ab.gif"
 
-class LoginForm extends React.Component {
+class LoginForm extends Component {
     state = {
         username: "",
         password: "",

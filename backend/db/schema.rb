@@ -21,10 +21,7 @@ ActiveRecord::Schema.define(version: 2021_05_28_184651) do
     t.integer "sp_a"
     t.integer "sp_d"
     t.integer "spd"
-    t.string "move1"
-    t.string "move2"
-    t.string "move3"
-    t.string "move4"
+    t.string "moves"
   end
 
   create_table "teams", force: :cascade do |t|

@@ -55,3 +55,77 @@ fieldset {
   width: 30px;
   height: 30px;
 }
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.pokemon-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: space-between;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  width: 100px;
+  height: 195px;
+  margin: 10px;
+}
+
+.type-container {
+  margin-top: auto;
+}
+
+.type-container img {
+  margin: 0 2px 0 2px;
+  height: 15px;
+  width: 40px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-container img, .moves img {
+  width: 80px;
+  height: 20px;
+}
+
+.info-container .p-img {
+  width: 400px;
+  height: 400px;
+}
+
+table, th, tr {
+  border: 1px solid black;
+}
+
+.stats {
+  margin-top: 50px;
+}
+
+.stats th {
+  width: 125px;
+}
+
+.moves {
+  margin-top: 30px;
+}
+
+.moves th {
+  width: 191px;
+}
