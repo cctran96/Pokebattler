@@ -9,6 +9,7 @@ body {
   text-align: center;
   display: inline-flex;
   justify-content: space-between;
+  position: fixed;
 }
 
 #home, #team, #profile, #battle, .navbar a{
@@ -57,6 +58,7 @@ fieldset {
 }
 
 .card-container {
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,11 +79,18 @@ fieldset {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 20px;
+  border: 1px solid black;
   width: 100px;
   height: 195px;
   margin: 10px;
+  transition: transform 0.5s;
+}
+
+.pokemon-card:hover {
+  box-shadow: 0 0 2px 2px gray;
+  transform: scale(1.1)
 }
 
 .type-container {
