@@ -8,6 +8,7 @@ import Profile from './containers/Profile'
 import Battle from './containers/Battle'
 
 const pokemonUrl = "http://localhost:9393/pokemon"
+const moveUrl = "https://pokeapi.co/api/v2/move/"
 
 class App extends Component {
   state = {

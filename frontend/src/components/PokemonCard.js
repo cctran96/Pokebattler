@@ -1,8 +1,8 @@
 import React from 'react'
 
 const PokemonCard = ({pokemon, viewInfo, typeImg}) => {
-    const front = `https://img.pokemondb.net/sprites/black-white/anim/normal/${pokemon.name}.gif`
-    const back = `https://img.pokemondb.net/sprites/black-white/anim/back-normal/${pokemon.name}.gif`
+    const front = pokemon.name === "nidoran-♂" ? `https://img.pokemondb.net/sprites/black-white/anim/normal/nidoran-m.gif` : (pokemon.name === "nidoran-♀" ? `https://img.pokemondb.net/sprites/black-white/anim/normal/nidoran-f.gif` : `https://img.pokemondb.net/sprites/black-white/anim/normal/${pokemon.name}.gif`)
+    const back = pokemon.name === "nidoran-♂" ? `https://img.pokemondb.net/sprites/black-white/anim/back-normal/nidoran-m.gif` : (pokemon.name === "nidoran-♀" ? `https://img.pokemondb.net/sprites/black-white/anim/back-normal/nidoran-f.gif` : `https://img.pokemondb.net/sprites/black-white/anim/back-normal/${pokemon.name}.gif`)
     const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
 
     return (
