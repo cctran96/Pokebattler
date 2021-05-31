@@ -75,6 +75,10 @@ fieldset {
   background: red;
 }
 
+.team-form {
+  padding-top: 100px;
+}
+
 .pokemon-container {
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +165,7 @@ table, th, tr {
 }
 
 .return:hover, .add:hover, .remove:hover {
-  box-shadow: 0 0 2px 2px gray;
+  box-shadow: 0 0 2px 2px yellow;
   cursor: pointer;
 }
 

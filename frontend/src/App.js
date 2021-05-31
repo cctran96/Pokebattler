@@ -12,6 +12,7 @@ const movesUrl = "http://localhost:9393/moves"
 
 class App extends Component {
   state = {
+    currentUser: "",
     allPokemon: [],
     pokemon: [],
     moves: [],
@@ -33,6 +34,10 @@ class App extends Component {
     (team.length < 6 ? this.setState({teamInProcess: [...team, pokemon]}) : alert("Your team can only be composed of 6 pokemon!"))
   }
 
+  clearTeam = () => {
+    this.setState({teamInProcess: []})
+  }
+
   render() {
     return (
       <Router>
@@ -45,6 +50,7 @@ class App extends Component {
                 pokemon={this.state.pokemon} 
                 filterSearch={this.filterSearch}
                 addToTeam={this.addToTeam}
+                clearTeam={this.clearTeam}
                 teamInProcess={this.state.teamInProcess}
                 moves={this.state.moves}
               />}/>
