@@ -25,22 +25,61 @@ const typeImg = {
 
 class Team extends Component {
     state = {
+        search: "",
         viewed: "",
     }
 
     viewInfo = pokemon => {
-        this.setState({viewed: pokemon})
+        this.setState({viewed: this.state.viewed ? "" : pokemon})
+    }
+
+    changeSearch = e => {
+        this.setState({search: e.target.value})
+        this.props.filterSearch(e.target.value)
     }
 
     render() {
-        const cards = this.props.pokemon ? this.props.pokemon.map(p => <PokemonCard key={p.id} pokemon={p} viewInfo={this.viewInfo} typeImg={typeImg}/>) : null
+        const {teamInProcess, pokemon, addToTeam, moves} = this.props
+        const cards = pokemon ? pokemon.map(p => 
+        <PokemonCard 
+            key={p.id} 
+            pokemon={p} 
+            viewInfo={this.viewInfo} 
+            typeImg={typeImg} 
+            addToTeam={addToTeam}
+            teamInProcess={teamInProcess}
+        />) : null
         return (
-            this.state.viewed ? <ViewPokemon pokemon={this.state.viewed} typeImg={typeImg}/> :
-            <div className="card-container">
-                <div className="pokemon-container">
-                    {cards}
+            <>
+                <div className="team-container">
+                    <div className="pokemon-container">
+                        {teamInProcess.length > 0 ? teamInProcess.map(p => 
+                             <PokemonCard 
+                                key={p.id} 
+                                pokemon={p} 
+                                viewInfo={this.viewInfo} 
+                                typeImg={typeImg} 
+                                addToTeam={addToTeam}
+                                teamInProcess={teamInProcess}
+                            />) : null}
+                    </div>
                 </div>
-            </div>
+                {this.state.viewed ? 
+                <ViewPokemon 
+                    pokemon={this.state.viewed} 
+                    typeImg={typeImg} 
+                    viewInfo={this.viewInfo} 
+                    addToTeam={addToTeam}
+                    teamInProcess={teamInProcess}
+                    moves={moves}
+                /> :
+                <div className="card-container">
+                    <input className="poke-search" onChange={e => this.changeSearch(e)}type="text" value={this.state.search} placeholder="Search for a pokemon..."/>
+                    <div className="pokemon-container">
+                        {cards}
+                    </div>
+                </div>}
+            </>
         )
     }
 }

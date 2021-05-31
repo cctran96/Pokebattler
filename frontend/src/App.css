@@ -10,6 +10,7 @@ body {
   display: inline-flex;
   justify-content: space-between;
   position: fixed;
+  z-index: 9999;
 }
 
 #home, #team, #profile, #battle, .navbar a{
@@ -50,20 +51,28 @@ fieldset {
   border-radius: 50%;
   margin-right: 70px;
   padding: 1px 2px 1px 2px;
+  cursor: pointer;
 }
 
 .submit img {
   width: 30px;
   height: 30px;
 }
+.login-form {
+  padding-top: 80px;
+}
 
 .card-container {
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0;
+}
+
+.team-container {
+  padding-top: 70px;
+  background: red;
 }
 
 .pokemon-container {
@@ -82,18 +91,18 @@ fieldset {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   border: 1px solid black;
-  width: 100px;
-  height: 195px;
+  width: 110px;
+  height: 200px;
   margin: 10px;
   transition: transform 0.5s;
 }
 
 .pokemon-card:hover {
   box-shadow: 0 0 2px 2px gray;
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
-.type-container {
+.type-container{
   margin-top: auto;
 }
 
@@ -109,22 +118,51 @@ fieldset {
   align-items: center;
 }
 
+.info-container img {
+  margin-top: 5px;
+}
+
 .info-container img, .moves img {
-  width: 80px;
+  width: 50px;
   height: 20px;
 }
 
 .info-container .p-img {
-  width: 400px;
-  height: 400px;
+  width: 250px;
+  height: 250px;
 }
 
 table, th, tr {
   border: 1px solid black;
 }
 
-.stats {
-  margin-top: 50px;
+.return {
+  margin: 15px 0 15px 0;
+  padding: 15px;
+  border-radius: 100px;
+  background: rgb(75, 75, 199);
+  color: white;
+}
+
+.add {
+  margin: 15px 0 15px 0;
+  padding: 15px;
+  border-radius: 100px;
+  background: green;
+  color: white;
+}
+
+.remove {
+  margin: 15px 0 15px 0;
+  padding: 15px;
+  border-radius: 100px;
+  background: red;
+  color: white;
+}
+
+.return:hover, .add:hover, .remove:hover {
+  box-shadow: 0 0 2px 2px gray;
+  cursor: pointer;
 }
 
 .stats th {
@@ -137,4 +175,16 @@ table, th, tr {
 
 .moves th {
   width: 191px;
+}
+
+.poke-search {
+  width: 700px;
+  height: 25px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.button-container button{
+  margin: 3px 2px 0px 2px;
+  cursor: pointer
 }

@@ -8,15 +8,29 @@ import Profile from './containers/Profile'
 import Battle from './containers/Battle'
 
 const pokemonUrl = "http://localhost:9393/pokemon"
-const moveUrl = "https://pokeapi.co/api/v2/move/"
+const movesUrl = "http://localhost:9393/moves"
 
 class App extends Component {
   state = {
-    pokemon: []
+    allPokemon: [],
+    pokemon: [],
+    moves: [],
+    teamInProcess: []
   }
 
   componentDidMount() {
-    fetch(pokemonUrl).then(r => r.json()).then(pokemon => this.setState({pokemon: pokemon.pokemon}))
+    fetch(pokemonUrl).then(r => r.json()).then(pokemon => this.setState({pokemon: pokemon.pokemon, allPokemon: pokemon.pokemon}))
+    fetch(movesUrl).then(r => r.json()).then(moves => this.setState({moves: moves.moves}))
+  }
+
+  filterSearch = input => {
+    this.setState({pokemon: this.state.allPokemon.filter(p => !this.state.teamInProcess.includes(p) && p.name.includes(input))})
+  }
+
+  addToTeam = pokemon => {
+    let team = this.state.teamInProcess
+    team.includes(pokemon) ? this.setState({teamInProcess: team.filter(p => p !== pokemon)}) :
+    (team.length < 6 ? this.setState({teamInProcess: [...team, pokemon]}) : alert("Your team can only be composed of 6 pokemon!"))
   }
 
   render() {
@@ -25,7 +39,15 @@ class App extends Component {
         <div className="route-container">
           <Navbar />
           <Route exact path="/" render={() => <Home />}/>
-          <Route exact path="/team" render={() => <Team pokemon={this.state.pokemon}/>}/>
+          <Route exact path="/team" 
+            render={() => 
+              <Team 
+                pokemon={this.state.pokemon} 
+                filterSearch={this.filterSearch}
+                addToTeam={this.addToTeam}
+                teamInProcess={this.state.teamInProcess}
+                moves={this.state.moves}
+              />}/>
           <Route exact path="/profile" render={() => <Profile />}/>
           <Route exact path="/battle" render={() => <Battle />}/>
         </div>

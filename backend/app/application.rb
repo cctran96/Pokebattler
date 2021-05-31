@@ -6,7 +6,8 @@ class Application
 
     if req.path.match(/pokemon/) && req.get?
       return [200, { 'Content-Type' => 'application/json' }, [ {:pokemon => Pokemon.all}.to_json ]]
-
+    elsif req.path.match(/moves/) && req.get?
+      return [200, { 'Content-Type' => 'application/json' }, [ {:moves => Move.all}.to_json ]]
     else
       resp.write "Path Not Found"
 
