@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_184651) do
+ActiveRecord::Schema.define(version: 2021_05_30_234956) do
+
+  create_table "moves", force: :cascade do |t|
+    t.string "name"
+    t.integer "accuracy"
+    t.integer "power"
+    t.integer "pp"
+    t.integer "priority"
+    t.string "move_class"
+    t.string "move_type"
+  end
 
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
