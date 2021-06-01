@@ -13,12 +13,16 @@ body {
   z-index: 9999;
 }
 
-#home, #team, #profile, #battle, .navbar a{
+#home, #team, #profile, #battle, .navbar button{
   text-decoration: none;
   text-transform: uppercase;
   color: black;
   padding: 15px;
   cursor: pointer;
+  background: red;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .login-form {
