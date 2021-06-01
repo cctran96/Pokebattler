@@ -2,26 +2,7 @@ import React, { Component } from 'react'
 import PokemonCard from '../components/PokemonCard'
 import ViewPokemon from '../components/ViewPokemon'
 
-const typeImg = {
-    normal: "https://cdn2.bulbagarden.net/upload/e/e4/NormalIC.gif",
-    fight: "https://cdn2.bulbagarden.net/upload/8/8e/FightingIC.gif",
-    flying: "https://cdn2.bulbagarden.net/upload/7/73/FlyingIC.gif",
-    poison: "https://cdn2.bulbagarden.net/upload/7/71/PoisonIC.gif",
-    ground: "https://cdn2.bulbagarden.net/upload/d/d9/GroundIC.gif",
-    rock: "https://cdn2.bulbagarden.net/upload/1/15/RockIC.gif",
-    bug: "https://cdn2.bulbagarden.net/upload/2/2a/BugIC.gif",
-    ghost: "https://cdn2.bulbagarden.net/upload/4/48/GhostIC.gif",
-    steel: "https://cdn2.bulbagarden.net/upload/6/69/SteelIC.gif",
-    fire: "https://cdn2.bulbagarden.net/upload/d/d0/FireIC.gif",
-    water: "https://cdn2.bulbagarden.net/upload/c/cc/WaterIC.gif",
-    grass: "https://cdn2.bulbagarden.net/upload/8/8a/GrassIC.gif",
-    electric: "https://cdn2.bulbagarden.net/upload/f/f7/ElectricIC.gif",
-    psychic: "https://cdn2.bulbagarden.net/upload/2/23/PsychicIC.gif",
-    ice: "https://cdn2.bulbagarden.net/upload/7/70/IceIC.gif",
-    dragon: "https://cdn2.bulbagarden.net/upload/5/57/DragonIC.gif",
-    dark: "https://cdn2.bulbagarden.net/upload/e/e9/DarkIC.gif",
-    fairy: "https://cdn2.bulbagarden.net/upload/6/61/FairyIC.gif"   
-}
+const teamsUrl = "http://localhost:9393/teams"
 
 class Team extends Component {
     state = {
@@ -45,7 +26,11 @@ class Team extends Component {
 
     saveTeam = e => {
         e.preventDefault()
-        // const obj = {name: , trainer_id: , team:}
+        const obj = {
+            name: this.state.teamName, 
+            trainer_id: this.props.currentUser.id, 
+            team: this.props.teamInProcess.map(pokemon => pokemon.name).join(", ")
+        }
         const config = {
             method: "POST",
             headers: {
@@ -54,18 +39,23 @@ class Team extends Component {
             },
             body: JSON.stringify(obj)
         }
+        fetch(teamsUrl, config).then(r => r.json()).then(team => this.props.updateTrainerTeams(team.team))
         this.props.clearTeam()
     }
 
+    changeTeam = pokemon => {
+        this.props.addToTeam(pokemon, this.state.search)
+    }
+
     render() {
-        const {teamInProcess, pokemon, addToTeam, moves} = this.props
+        const {teamInProcess, pokemon, moves} = this.props
         const cards = pokemon ? pokemon.map(p => 
         <PokemonCard 
             key={p.id} 
             pokemon={p} 
             viewInfo={this.viewInfo} 
-            typeImg={typeImg} 
-            addToTeam={addToTeam}
+            typeImg={this.props.typeImg} 
+            addToTeam={this.changeTeam}
             teamInProcess={teamInProcess}
         />) : null
         return (
@@ -79,12 +69,12 @@ class Team extends Component {
                                 key={p.id} 
                                 pokemon={p} 
                                 viewInfo={this.viewInfo} 
-                                typeImg={typeImg} 
-                                addToTeam={addToTeam}
+                                typeImg={this.props.typeImg} 
+                                addToTeam={this.changeTeam}
                                 teamInProcess={teamInProcess}
                             />)}
                             <form className="team-form" onSubmit={e => this.saveTeam(e)}>
-                                <input onChange={e => this.nameInput(e)} type="text" value={this.state.teamName}/>
+                                <input onChange={e => this.nameInput(e)} type="text" value={this.state.teamName} placeholder="Name your team..." required/>
                                 <input type="submit" value="Save Team"/>
                             </form>
                         </> : null}
@@ -93,9 +83,9 @@ class Team extends Component {
                 {this.state.viewed ? 
                 <ViewPokemon 
                     pokemon={this.state.viewed} 
-                    typeImg={typeImg} 
+                    typeImg={this.props.typeImg} 
                     viewInfo={this.viewInfo} 
-                    addToTeam={addToTeam}
+                    addToTeam={this.changeTeam}
                     teamInProcess={teamInProcess}
                     moves={moves}
                 /> :
