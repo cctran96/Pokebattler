@@ -10,6 +10,7 @@ import Battle from './containers/Battle'
 const pokemonUrl = "http://localhost:9393/pokemon/"
 const movesUrl = "http://localhost:9393/moves/"
 const teamsUrl = "http://localhost:9393/teams/"
+const spritesUrl = "http://localhost:9393/sprites/"
 const fetchData = url => fetch(url).then(r => r.json())
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
     currentUser: "",
     allPokemon: [],
     pokemon: [],
+    sprites: [],
     moves: [],
     teamInProcess: []
   }
@@ -29,6 +31,7 @@ class App extends Component {
   componentDidMount() {
     fetchData(pokemonUrl).then(pokemon => this.setState({pokemon: pokemon.pokemon, allPokemon: pokemon.pokemon}))
     fetchData(movesUrl).then(moves => this.setState({moves: moves.moves}))
+    fetchData(spritesUrl).then(sprites => this.setState({sprites: sprites.sprites}))
   }
 
   filterSearch = input => {
@@ -51,6 +54,10 @@ class App extends Component {
 
   deleteTeam = id => {
     fetch(teamsUrl + id, {method: "DELETE"}).then(this.setState({trainerTeams: this.state.trainerTeams.filter(team => team.id !== id)}))
+  }
+
+  updateTrainer = info => {
+    this.setState({currentUser: info})
   }
 
   render() {
@@ -81,6 +88,8 @@ class App extends Component {
                 typeImg={typeImg}
                 moves={this.state.moves}
                 deleteTeam={this.deleteTeam}
+                updateTrainer={this.updateTrainer}
+                sprites={this.state.sprites}
               />}/>
           <Route exact path="/battle" render={() => <Battle />}/>
         </div>

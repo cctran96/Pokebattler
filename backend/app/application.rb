@@ -10,6 +10,8 @@ class Application
       return [200, { 'Content-Type' => 'application/json' }, [{:moves => Move.all}.to_json]]
     elsif req.path.match(/teams/) && req.get?
       return [200, { 'Content-Type' => 'application/json' }, [{:teams => Team.all}.to_json]]
+    elsif req.path.match(/sprites/) && req.get?
+      return [200, { 'Content-Type' => 'application/json' }, [{:sprites => Sprite.all}.to_json]]
     elsif req.path.match(/login/) && req.post?
       user = JSON.parse(req.body.read)
       found = Trainer.without_pw(user)

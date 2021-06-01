@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import TeamCard from '../components/TeamCard'
 import ViewInTeam from '../components/ViewInTeam'
+import EditProfile from '../components/EditProfile'
 
 class Profile extends Component {
     state = {
-        viewed: null
+        viewed: null,
+        editing: false
     }
 
     viewInfo = pokemon => {
         this.setState({viewed: this.state.viewed ? "" : pokemon})
     }
 
+    editProfile = () => {
+        this.setState({editing: true})
+    }
+
     render() {
-        const {currentUser} = this.props
+        const {currentUser, updateTrainer} = this.props
         return (
             <div className="profile">
                 {this.state.viewed ?
@@ -23,32 +29,36 @@ class Profile extends Component {
                     moves={this.props.moves}
                 /> :
                 (currentUser ? 
-                <>
-                    <h2>{currentUser.name}</h2>
-                    <h3>Wins: {currentUser.wins}</h3>
-                    <h3>Losses: {currentUser.losses}</h3>
-                    <img className="profile-img" src={currentUser.sprite} alt="trainer"/>
-                    <h3>{currentUser.bio}</h3>
-                    <div className="trainer-teams">
-                        {this.props.trainerTeams.map((team, idx) =>
-                            <div key={idx}>
-                                <div className="delete-team">
-                                    <h2>{team.name}</h2>
-                                    <button onClick={() => this.props.deleteTeam(team.id)}>Delete</button>
+                    this.state.editing ? <EditProfile currentUser={currentUser} updateTrainer={updateTrainer} sprites={this.props.sprites}/> :
+                    (<>
+                        <div className="trainer-info">
+                            <h2>{currentUser.name}</h2>
+                            <h3>Wins: {currentUser.wins}</h3>
+                            <h3>Losses: {currentUser.losses}</h3>
+                            <img className="profile-img" src={currentUser.sprite} alt="trainer"/>
+                            <h3>{currentUser.bio}</h3>
+                            <button onClick={this.editProfile}>Edit Profile</button>
+                        </div>
+                        <div className="trainer-teams">
+                            {this.props.trainerTeams.map((team, idx) =>
+                                <div key={idx}>
+                                    <div className="delete-team">
+                                        <h2>{team.name}</h2>
+                                        <button onClick={() => this.props.deleteTeam(team.id)}>Delete</button>
+                                    </div>
+                                    <div className="pokemon-container">
+                                        {team.team.split(", ").map(pokemon => this.props.allPokemon.find(p => p.name === pokemon)).map((pokemon,idx)=>
+                                            <TeamCard
+                                                key={idx}
+                                                pokemon={pokemon}
+                                                viewInfo={this.viewInfo}
+                                                typeImg={this.props.typeImg}
+                                            />)}
+                                    </div>
                                 </div>
-                                <div className="pokemon-container">
-                                    {team.team.split(", ").map(pokemon => this.props.allPokemon.find(p => p.name === pokemon)).map((pokemon,idx)=>
-                                        <TeamCard
-                                            key={idx}
-                                            pokemon={pokemon}
-                                            viewInfo={this.viewInfo}
-                                            typeImg={this.props.typeImg}
-                                        />)}
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </> : <h2>Please sign in to manage your Pokémon</h2>)}
+                            )}
+                        </div>
+                    </>) : <h2>Please sign in to manage your Pokémon</h2>)}
             </div>
         )
     }

@@ -213,3 +213,28 @@ table, th, tr {
 .delete-team button {
   margin-left: 30px;
 }
+
+.trainer-info {
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+.trainer-info button {
+  margin-bottom: 25px;
+}
+
+textarea {
+  height: 100px;
+  margin: 10px;
+}
+
+.edit-profile {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
