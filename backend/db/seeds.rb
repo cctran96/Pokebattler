@@ -2,8 +2,8 @@ Trainer.destroy_all
 Team.destroy_all
 Pokemon.destroy_all
 
-chau = Trainer.create(name: "Pokemon Master Chau", username: "chautran", password: "password", wins: 999, losses: 0, bio: "I say you too when the waiter tells me to enjoy my food.")
-jasper = Trainer.create(name: "Pokemon Master Jasper", username: "jasperreed", password: "password", wins: 999, losses: 0, bio: "Cupid shuffle!")
+chau = Trainer.create(name: "Pokemon Master Chau", username: "chautran", password: "password", wins: 999, losses: 0, bio: "I say you too when the waiter tells me to enjoy my food.", sprite: "https://archives.bulbagarden.net/media/upload/4/4e/Spr_B2W2_Hilbert_2.png")
+jasper = Trainer.create(name: "Pokemon Master Jasper", username: "jasperreed", password: "password", wins: 999, losses: 0, bio: "Cupid shuffle!", sprite: "https://archives.bulbagarden.net/media/upload/a/a6/Spr_B2W2_Hoopster.png")
 
 Team.create(name: "Chau's Team", trainer: chau, team: "magikarp, magikarp, magikarp, magikarp, magikarp, magikarp")
 Team.create(name: "Jasper's Team", trainer: jasper, team: "pikachu, moltres, mewtwo, dragonite, zapdos, articuno")

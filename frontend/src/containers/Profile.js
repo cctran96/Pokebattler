@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import TeamCard from '../components/TeamCard'
 import ViewInTeam from '../components/ViewInTeam'
 
-const sprite = "https://archives.bulbagarden.net/media/upload/4/4e/Spr_B2W2_Hilbert_2.png"
-
 class Profile extends Component {
     state = {
         viewed: null
@@ -29,7 +27,7 @@ class Profile extends Component {
                     <h2>{currentUser.name}</h2>
                     <h3>Wins: {currentUser.wins}</h3>
                     <h3>Losses: {currentUser.losses}</h3>
-                    <img className="profile-img" src={sprite} alt="trainer"/>
+                    <img className="profile-img" src={currentUser.sprite} alt="trainer"/>
                     <h3>{currentUser.bio}</h3>
                     <div className="trainer-teams">
                         {this.props.trainerTeams.map((team, idx) =>
