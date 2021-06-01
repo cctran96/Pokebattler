@@ -14,7 +14,7 @@ class Profile extends Component {
     }
 
     editProfile = () => {
-        this.setState({editing: true})
+        this.setState({editing: !this.state.editing})
     }
 
     render() {
@@ -29,13 +29,13 @@ class Profile extends Component {
                     moves={this.props.moves}
                 /> :
                 (currentUser ? 
-                    this.state.editing ? <EditProfile currentUser={currentUser} updateTrainer={updateTrainer} sprites={this.props.sprites}/> :
+                    this.state.editing ? <EditProfile editProfile={this.editProfile} currentUser={currentUser} updateTrainer={updateTrainer} sprites={this.props.sprites}/> :
                     (<>
                         <div className="trainer-info">
                             <h2>{currentUser.name}</h2>
                             <h3>Wins: {currentUser.wins}</h3>
                             <h3>Losses: {currentUser.losses}</h3>
-                            <img className="profile-img" src={currentUser.sprite} alt="trainer"/>
+                            <img className="profile-img" src={require(`../images/Spr_B2W2_${currentUser.sprite.split(" ").join("_")}.png`).default} alt="trainer"/>
                             <h3>{currentUser.bio}</h3>
                             <button onClick={this.editProfile}>Edit Profile</button>
                         </div>

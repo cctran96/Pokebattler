@@ -26,6 +26,11 @@ body {
   float: right;
   border: 1px solid lightslategray;
   background: white;
+  height: 170px;
+}
+
+.login-form a {
+  margin-left: 195px;
 }
 
 .active {
@@ -58,7 +63,7 @@ fieldset {
   width: 30px;
   height: 30px;
 }
-.login-form, .profile{
+.login-form, .profile, .signup{
   padding-top: 80px;
 }
 
@@ -79,7 +84,7 @@ fieldset {
   padding-top: 100px;
 }
 
-.pokemon-container {
+.pokemon-container, .sprite-container {
   display: flex;
   flex-wrap: wrap;
   align-items: space-between;
@@ -101,7 +106,7 @@ fieldset {
   transition: transform 0.5s;
 }
 
-.pokemon-card:hover {
+.pokemon-card:hover, .sprite:hover {
   box-shadow: 0 0 2px 2px gray;
   transform: scale(1.1);
 }
@@ -182,7 +187,7 @@ table, th, tr {
 }
 
 .poke-search {
-  width: 700px;
+  width: 500px;
   height: 25px;
   font-size: 20px;
   margin-top: 10px;
@@ -201,8 +206,8 @@ table, th, tr {
 }
 
 .profile-img {
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
 }
 
 .delete-team {
@@ -237,4 +242,56 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup input {
+  width: 250px;
+  height: 30px;
+  font-size: 15px;
+}
+
+.signup button {
+  display: none;
+}
+
+.signup label {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.form-container {
+  height: 100vh;
+  background-image: url("https://media.timeout.com/images/105678963/image.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.sprite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  border: 1px solid black;
+  width: 150px;
+  height: 180px;
+  transition: transform 0.5s;
+  margin: 10px;
+}
+
+.sprite button {
+  margin-top: auto;
+  margin-bottom: 5px;
 }

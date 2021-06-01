@@ -6,11 +6,11 @@ import Home from './containers/Home'
 import Team from './containers/Team'
 import Profile from './containers/Profile'
 import Battle from './containers/Battle'
+import Signup from './containers/Signup'
 
 const pokemonUrl = "http://localhost:9393/pokemon/"
 const movesUrl = "http://localhost:9393/moves/"
 const teamsUrl = "http://localhost:9393/teams/"
-const spritesUrl = "http://localhost:9393/sprites/"
 const fetchData = url => fetch(url).then(r => r.json())
 
 class App extends Component {
@@ -19,7 +19,6 @@ class App extends Component {
     currentUser: "",
     allPokemon: [],
     pokemon: [],
-    sprites: [],
     moves: [],
     teamInProcess: []
   }
@@ -28,10 +27,13 @@ class App extends Component {
     this.setState({currentUser: user, trainerTeams: team})
   }
 
+  logout = () => {
+    this.setState({currentUser: "", trainerTeams: []})
+  }
+
   componentDidMount() {
     fetchData(pokemonUrl).then(pokemon => this.setState({pokemon: pokemon.pokemon, allPokemon: pokemon.pokemon}))
     fetchData(movesUrl).then(moves => this.setState({moves: moves.moves}))
-    fetchData(spritesUrl).then(sprites => this.setState({sprites: sprites.sprites}))
   }
 
   filterSearch = input => {
@@ -64,8 +66,9 @@ class App extends Component {
     return (
       <Router>
         <div className="route-container">
-          <Navbar login={this.login} currentUser={this.state.currentUser}/>
+          <Navbar login={this.login} logout={this.logout} currentUser={this.state.currentUser}/>
           <Route exact path="/" render={() => <Home />}/>
+          {this.state.currentUser ? null : <Route exact path="/signup" render={() => <Signup login={this.login}/>}/>}
           <Route exact path="/team" 
             render={() => 
               <Team 

@@ -39,6 +39,7 @@ class LoginForm extends Component {
                         <button type="submit" className="submit"><img src={img} alt="pokeball"/></button>
                         <label><input type="checkbox"/>Remember me</label>
                     </fieldset>
+                    <a href="/signup">Sign up</a>
                 </form>
             </div>
         )

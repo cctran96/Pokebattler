@@ -7,6 +7,7 @@ class CreateTrainers < ActiveRecord::Migration[5.2]
       t.integer :wins
       t.integer :losses
       t.string :bio
+      t.string :sprite
     end
   end
 end
