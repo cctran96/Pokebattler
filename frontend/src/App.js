@@ -17,6 +17,7 @@ class App extends Component {
   state = {
     trainerTeams: [],
     currentUser: "",
+    currentTeam: "",
     allPokemon: [],
     pokemon: [],
     moves: [],
@@ -42,7 +43,7 @@ class App extends Component {
 
   addToTeam = (pokemon, input) => {
     let team = this.state.teamInProcess
-    team.includes(pokemon) ? this.setState({teamInProcess: team.filter(p => p !== pokemon), pokemon: this.state.allPokemon.filter(p => !team.includes(p) && p.name.includes(input) || p === pokemon && p.name.includes(input))}) :
+    team.includes(pokemon) ? this.setState({teamInProcess: team.filter(p => p !== pokemon), pokemon: this.state.allPokemon.filter(p => (!team.includes(p) && p.name.includes(input)) || (p === pokemon && p.name.includes(input)))}) :
     (team.length < 6 ? this.setState({teamInProcess: [...team, pokemon], pokemon: this.state.pokemon.filter(p => p !== pokemon)}) : alert("Your team can only be composed of 6 pokemon!"))
   }
 
@@ -60,6 +61,10 @@ class App extends Component {
 
   updateTrainer = info => {
     this.setState({currentUser: info})
+  }
+
+  setCurrentTeam = team => {
+    this.setState({currentTeam: team})
   }
 
   render() {
@@ -86,6 +91,8 @@ class App extends Component {
             render={() => 
               <Profile
                 currentUser={this.state.currentUser}
+                currentTeam={this.state.currentTeam}
+                setCurrentTeam={this.setCurrentTeam}
                 trainerTeams={this.state.trainerTeams}
                 allPokemon={this.state.allPokemon}
                 typeImg={typeImg}
@@ -94,7 +101,11 @@ class App extends Component {
                 updateTrainer={this.updateTrainer}
                 sprites={this.state.sprites}
               />}/>
-          <Route exact path="/battle" render={() => <Battle />}/>
+          <Route exact path="/battle" render={() => 
+          <Battle 
+            currentUser={this.state.currentUser}
+            currentTeam={this.state.currentTeam ? this.state.currentTeam.team.split(", ").map(p => JSON.parse(JSON.stringify(this.state.allPokemon.find(pokemon => pokemon.name === p)))).map((p,idx) => ({...p, unique: idx, currentHP: p.hp})) : null}
+          />}/>
         </div>
       </Router>
     )

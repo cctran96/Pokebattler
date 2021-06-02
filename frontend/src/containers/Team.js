@@ -62,7 +62,7 @@ class Team extends Component {
             teamInProcess={teamInProcess}
         />) : null
         return (
-            <>
+            <div className="team-page">
                 <div className="team-container">
                     <div className="pokemon-container">
                         {teamInProcess.length > 0 ?
@@ -98,7 +98,7 @@ class Team extends Component {
                         {cards}
                     </div>
                 </div>}
-            </>
+            </div>
         )
     }
 }

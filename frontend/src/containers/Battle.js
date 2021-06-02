@@ -1,10 +1,38 @@
 import React, { Component } from 'react'
 
 class Battle extends Component {
+    state = {
+        enemyUser: "",
+        yourTeam: this.props.currentTeam,
+        yourCurrent: "",
+        enemyTeam: [],
+        enemyCurrent: "",
+        log: []
+    }
+
+    componentDidMount(){
+        
+    }
+
+    fetchEnemyTeam = () => {
+        
+    }
+
     render() {
         return (
-            <div>
+            <div className="battle">
+                {this.props.currentUser ? 
+                <>
+                    <div className="pokemon-battle">
+                        <p>Test</p>
+                    </div>
+                    <div className="chatbox">
+                        <ul>
 
+                        </ul>
+                    </div>
+                </> 
+                : <h2>Please sign in if you wish to battle</h2>}
             </div>
         )
     }

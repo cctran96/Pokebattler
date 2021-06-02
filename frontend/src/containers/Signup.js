@@ -61,6 +61,10 @@ class Signup extends Component {
                         <button type="submit" />
                     </form>
                 </div>
+                <div className="me">
+                    <p>Can you defeat this Pokémon master?</p>
+                    <img src={require("../images/Pokemon Master.png").default} alt="me"/>
+                </div>
             </div>
         )
     }

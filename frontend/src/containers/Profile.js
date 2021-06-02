@@ -45,6 +45,7 @@ class Profile extends Component {
                                     <div className="delete-team">
                                         <h2>{team.name}</h2>
                                         <button onClick={() => this.props.deleteTeam(team.id)}>Delete</button>
+                                        {this.props.currentTeam === team ? null : <button onClick={() => this.props.setCurrentTeam(team)}>Set as current team</button>}
                                     </div>
                                     <div className="pokemon-container">
                                         {team.team.split(", ").map(pokemon => this.props.allPokemon.find(p => p.name === pokemon)).map((pokemon,idx)=>

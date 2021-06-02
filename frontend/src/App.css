@@ -67,7 +67,7 @@ fieldset {
   width: 30px;
   height: 30px;
 }
-.login-form, .profile, .signup{
+.login-form, .profile, .signup, .home{
   padding-top: 80px;
 }
 
@@ -84,11 +84,7 @@ fieldset {
   background: red;
 }
 
-.team-form {
-  padding-top: 100px;
-}
-
-.pokemon-container, .sprite-container {
+.pokemon-container, .sprite-container, .team {
   display: flex;
   flex-wrap: wrap;
   align-items: space-between;
@@ -231,6 +227,7 @@ table, th, tr {
   justify-content: center;
   border: 1px solid black;
   border-radius: 30px;
+  background: white;
 }
 .trainer-info button {
   margin-bottom: 25px;
@@ -298,4 +295,47 @@ textarea {
 .sprite button {
   margin-top: auto;
   margin-bottom: 5px;
+}
+
+.me {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.me img {
+  height: 200px;
+  width: 200px;
+}
+
+.battle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.battle h2 {
+  padding-top: 80px;
+  margin-bottom: auto;
+}
+
+.pokemon-battle {
+  margin-top: 65px;
+  border: 1px solid black;
+  width: 90%;
+  height: 65%;
+  background: white;
+}
+
+.chatbox {
+  border: 1px solid black;
+  width: 90%;
+  height: 20%;
+  background: white;
 }
