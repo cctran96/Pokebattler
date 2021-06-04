@@ -446,12 +446,12 @@ textarea {
   margin-bottom: 5px;
 }
 
-.chatbox li:nth-child(even) {
-  color: red;
+.your-log {
+  color: blue;
 }
 
-.chatbox li:nth-child(odd) {
-  color: blue;
+.enemy-log {
+  color: red;
 }
 
 

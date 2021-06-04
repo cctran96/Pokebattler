@@ -127,30 +127,32 @@ class Battle extends Component {
         const yourName = pokemonName(you)
         const selectedMove = this.state.selectedMove
         const move = this.props.moves.find(m => m.name === selectedMove)
+        const enemyDmg = this.moveDamage(enemy, you, selectedEnemyMove)
+        const moveDmg = this.moveDamage(you, enemy, selectedMove)
         if (you.spd > enemy.spd) {
-            let hpChange = enemy.currentHP - this.moveDamage(you, enemy, selectedMove)
+            let hpChange = enemy.currentHP - moveDmg
             let enemyObj = {...enemy, currentHP: hpChange > 0 ? hpChange : 0}
-            let message = [...this.state.log, `${yourName} used ${formattedMove(selectedMove)} on ${enemyName}${effectiveness(type(enemy, move))}`]
+            let message = [...this.state.log, `Your ${yourName} used ${formattedMove(selectedMove)} on the opponent's ${enemyName}${effectiveness(type(enemy, move))} (Dealt ${moveDmg})`]
             this.setState({
                 enemyCurrent: enemyObj,
                 enemyTeam: this.state.enemyTeam.map(p => p.unique === enemyObj.unique ? enemyObj : p),
-                log: hpChange > 0 ? message : [...message, `${enemyName} has fainted.`],
+                log: hpChange > 0 ? message : [...message, `The opponent's ${enemyName} has fainted.`],
             }, () => {
                 this.setState({selectedMove: null})
-                let yourHp = you.currentHP - this.moveDamage(enemy, you, selectedEnemyMove)
+                let yourHp = you.currentHP - enemyDmg
                 let yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
-                let message = [...this.state.log, `${enemyName} used ${formattedMove(selectedEnemyMove)} on ${yourName}${effectiveness(type(you, enemyMove))}`]
+                let message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName}${effectiveness(type(you, enemyMove))} (Dealt ${enemyDmg})`]
                 if (hpChange > 0) {    
                     this.setState({
                         yourCurrent: yourObj,
                         yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                        log: yourHp > 0 ? message : [...message, `${yourName} has fainted.`]
+                        log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
                     }, () => {
                         this.yourTeamCheck()
                     })
                 } else {
                     if (this.enemySwitch()) {
-                    this.setState({enemyCurrent: this.enemySwitch()})
+                    this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})})
                     } else {
                         this.setState({won: true})
                         this.updateWin()
@@ -158,18 +160,18 @@ class Battle extends Component {
                 }
             })
         } else {
-            let yourHp = you.currentHP - this.moveDamage(enemy, you, selectedEnemyMove)
+            let yourHp = you.currentHP - enemyDmg
             let yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
-            let message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName}${effectiveness(type(you, enemyMove))}`]
+            let message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName}${effectiveness(type(you, enemyMove))} (Dealt ${enemyDmg})`]
             this.setState({
                 yourCurrent: yourObj,
                 yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
                 log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
             }, () => {
                 this.yourTeamCheck()
-                let hpChange = enemy.currentHP - this.moveDamage(you, enemy, this.state.selectedMove)
+                let hpChange = enemy.currentHP - moveDmg
                 let enemyObj = {...enemy, currentHP: hpChange > 0 ? hpChange : 0}
-                let message = [...this.state.log, `Your ${yourName} used ${formattedMove(selectedMove)} on the opponent's ${enemyName}${effectiveness(type(enemy, move))}`]
+                let message = [...this.state.log, `Your ${yourName} used ${formattedMove(selectedMove)} on the opponent's ${enemyName}${effectiveness(type(enemy, move))} (Dealt ${moveDmg})`]
                 this.setState({selectedMove: null})
                 if (yourHp > 0) {
                     this.setState({
@@ -182,7 +184,8 @@ class Battle extends Component {
                             return
                         }
                         if (this.enemySwitch()) {
-                            this.setState({enemyCurrent: this.enemySwitch()})
+                            
+                            this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})})
                         } else {
                             this.setState({won: true})
                             this.updateWin()
@@ -217,13 +220,14 @@ class Battle extends Component {
                 const enemyMove = this.props.moves.find(m => m.name === selectedEnemyMove)
                 const you = this.state.yourCurrent
                 const yourName = pokemonName(you)
-                const yourHp = you.currentHP - this.moveDamage(enemy, you, selectedEnemyMove)
+                const enemyDmg = this.moveDamage(enemy, you, selectedEnemyMove)
+                const yourHp = you.currentHP - enemyDmg
                 const yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
-                const message = [...this.state.log, `${enemyName} used ${formattedMove(selectedEnemyMove)} on ${yourName}${effectiveness(type(you, enemyMove))}`]
+                const message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName} while it switched in${effectiveness(type(you, enemyMove))} (Dealt ${enemyDmg})`]
                 this.setState({
                     yourCurrent: yourObj,
                     yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                    log: yourHp > 0 ? message : [...message, `${pokemonName(this.state.yourCurrent)} has fainted.`]
+                    log: yourHp > 0 ? message : [...message, `Your ${pokemonName(this.state.yourCurrent)} has fainted.`]
                 }, () => {
                     this.yourTeamCheck()
                 })
@@ -307,7 +311,7 @@ class Battle extends Component {
                     </div>
                     <div className="chatbox">
                         <ul>
-                            {this.state.log.map(action => <li>{action}</li>)}
+                            {this.state.log.map(action => <li className={action.startsWith("The") ? "enemy-log" : "your-log"}>{action}</li>)}
                         </ul>
                     </div>
                 </>
