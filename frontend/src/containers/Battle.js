@@ -160,22 +160,22 @@ class Battle extends Component {
         } else {
             let yourHp = you.currentHP - this.moveDamage(enemy, you, selectedEnemyMove)
             let yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
-            let message = [...this.state.log, `${enemyName} used ${formattedMove(selectedEnemyMove)} on ${yourName}${effectiveness(type(you, enemyMove))}`]
+            let message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName}${effectiveness(type(you, enemyMove))}`]
             this.setState({
                 yourCurrent: yourObj,
                 yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                log: yourHp > 0 ? message : [...message, `${yourName} has fainted.`]
+                log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
             }, () => {
                 this.yourTeamCheck()
                 let hpChange = enemy.currentHP - this.moveDamage(you, enemy, this.state.selectedMove)
                 let enemyObj = {...enemy, currentHP: hpChange > 0 ? hpChange : 0}
-                let message = [...this.state.log, `${yourName} used ${formattedMove(selectedMove)} on ${enemyName}${effectiveness(type(enemy, move))}`]
+                let message = [...this.state.log, `Your ${yourName} used ${formattedMove(selectedMove)} on the opponent's ${enemyName}${effectiveness(type(enemy, move))}`]
                 this.setState({selectedMove: null})
                 if (yourHp > 0) {
                     this.setState({
                         enemyCurrent: enemyObj,
                         enemyTeam: this.state.enemyTeam.map(p => p.unique === enemyObj.unique ? enemyObj : p),
-                        log: hpChange > 0 ? message : [...message, `${enemyName} has fainted.`],
+                        log: hpChange > 0 ? message : [...message, `The opponent's ${enemyName} has fainted.`],
                         won: this.enemySwitch() ? null : true
                     }, () => {
                         if (hpChange > 0) {
@@ -266,7 +266,6 @@ class Battle extends Component {
                                     </div>
                                     <div className="enemy-pokemon">
                                         <img src={front(this.state.enemyCurrent)} alt={this.state.enemyCurrent.name}/>
-
                                     </div>
                                 </div>: null}
                             </div>
