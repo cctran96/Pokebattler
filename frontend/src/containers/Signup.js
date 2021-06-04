@@ -22,7 +22,8 @@ class Signup extends Component {
             username: this.state.username,
             password: this.state.password,
             wins: 0,
-            losses: 0
+            losses: 0,
+            sprite: "Ace Trainer F"
         }
         const config = {
             method: "POST",

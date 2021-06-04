@@ -12,6 +12,10 @@ class Application
       return [200, { 'Content-Type' => 'application/json' }, [{:teams => Team.all}.to_json]]
     elsif req.path.match(/trainers/) && req.get?
       return [200, { 'Content-Type' => 'application/json' }, [{:trainers => Trainer.all.map{|trainer| trainer.username}}.to_json]]
+    elsif req.path.match(/enemy/) && req.get?
+      trainer = Trainer.enemy_team.sample
+      team = trainer.teams.sample
+      return [200, { 'Content-Type' => 'application/json' }, [{:trainer => trainer, :team => team}.to_json]]
     elsif req.path.match(/trainers/) && req.post?
       data = JSON.parse(req.body.read)
       trainer = Trainer.create(data)
@@ -34,6 +38,12 @@ class Application
       return [200, {'Content-Type' => 'application/json' }, [{message: "Team deleted"}.to_json]]
     elsif req.path.match(/trainers/) && req.patch?
       id = req.path.split("/trainers/").last
+      trainer = Trainer.find(id)
+      data = JSON.parse(req.body.read)
+      trainer.update(data)
+      return [200, {'Content-Type' => 'application/json' }, [{:trainer => trainer}.to_json]]
+    elsif req.path.match(/battle/) && req.patch?
+      id = req.path.split("/battle/").last
       trainer = Trainer.find(id)
       data = JSON.parse(req.body.read)
       trainer.update(data)

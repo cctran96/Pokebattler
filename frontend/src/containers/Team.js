@@ -42,6 +42,7 @@ class Team extends Component {
         const save = () => {
             fetch(teamsUrl, config).then(r => r.json()).then(team => this.props.updateTrainerTeams(team.team))
             this.props.clearTeam()
+            this.props.restorePokemon(this.state.search)
         }
         this.props.currentUser ? save() : alert("Sign in to save your team!")
     }

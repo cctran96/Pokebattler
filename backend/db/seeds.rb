@@ -9,7 +9,7 @@ Team.create(name: "Go fish", trainer: chau, team: "magikarp, magikarp, magikarp,
 Team.create(name: "Ice in my veins", trainer: chau, team: "articuno, dewgong, jynx, lapras, gyarados, blastoise")
 Team.create(name: "OG", trainer: chau, team: "blastoise, venusaur, charizard, pikachu, gengar, snorlax")
 Team.create(name: "Those that resemble me", trainer: chau, team: "snorlax, chansey, muk, drowzee, slowbro, dragonite")
-Team.create(name: "12", trainer: chau, team: "mew, mewtwo")
+Team.create(name: "1-2-1-2-1-2", trainer: chau, team: "mew, mewtwo, mew, mewtwo, mew, mewtwo")
 Team.create(name: "Uno Dos Tres", trainer: jasper, team: "articuno, zapdos, moltres")
 Team.create(name: "Buff like me", trainer: jasper, team: "machamp, machoke, poliwrath, hitmonchan, hitmonlee, nidoking")
 Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon")

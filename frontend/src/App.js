@@ -21,11 +21,12 @@ class App extends Component {
     allPokemon: [],
     pokemon: [],
     moves: [],
-    teamInProcess: []
+    teamInProcess: [],
+    battling: false
   }
 
   login = (user, team) => {
-    this.setState({currentUser: user, trainerTeams: team})
+    this.setState({currentUser: user, trainerTeams: team, currentTeam: team[0]})
   }
 
   logout = () => {
@@ -41,6 +42,10 @@ class App extends Component {
     this.setState({pokemon: this.state.allPokemon.filter(p => !this.state.teamInProcess.includes(p) && p.name.includes(input))})
   }
 
+  restorePokemon = input => {
+    this.setState({pokemon: this.state.allPokemon.filter(p => p.name.includes(input))})
+  }
+
   addToTeam = (pokemon, input) => {
     let team = this.state.teamInProcess
     team.includes(pokemon) ? this.setState({teamInProcess: team.filter(p => p !== pokemon), pokemon: this.state.allPokemon.filter(p => (!team.includes(p) && p.name.includes(input)) || (p === pokemon && p.name.includes(input)))}) :
@@ -52,11 +57,16 @@ class App extends Component {
   }
 
   updateTrainerTeams = team => {
-    this.setState({trainerTeams: [...this.state.trainerTeams, team]})
+    this.setState({trainerTeams: [...this.state.trainerTeams, team]},
+      () => {
+        this.state.trainerTeams.length === 1 ? this.setCurrentTeam(team) : console.log()
+      })
   }
 
   deleteTeam = id => {
-    fetch(teamsUrl + id, {method: "DELETE"}).then(this.setState({trainerTeams: this.state.trainerTeams.filter(team => team.id !== id)}))
+    const newTeam = this.state.trainerTeams.filter(team => team.id !== id)
+    fetch(teamsUrl + id, {method: "DELETE"}).then(this.setState({trainerTeams: newTeam}))
+    this.state.currentTeam.id === id ? this.setState({currentTeam: newTeam[0]}) : console.log()
   }
 
   updateTrainer = info => {
@@ -64,7 +74,11 @@ class App extends Component {
   }
 
   setCurrentTeam = team => {
-    this.setState({currentTeam: team})
+    this.setState({currentTeam: team, battling: false})
+  }
+
+  handleBattleStart = () => {
+    this.setState({battling: true})
   }
 
   render() {
@@ -86,6 +100,7 @@ class App extends Component {
                 currentUser={this.state.currentUser}
                 updateTrainerTeams={this.updateTrainerTeams}
                 typeImg={typeImg}
+                restorePokemon={this.restorePokemon}
               />}/>
           <Route exact path="/profile" 
             render={() => 
@@ -101,11 +116,17 @@ class App extends Component {
                 updateTrainer={this.updateTrainer}
                 sprites={this.state.sprites}
               />}/>
-          <Route exact path="/battle" render={() => 
-          <Battle 
-            currentUser={this.state.currentUser}
-            currentTeam={this.state.currentTeam ? this.state.currentTeam.team.split(", ").map(p => JSON.parse(JSON.stringify(this.state.allPokemon.find(pokemon => pokemon.name === p)))).map((p,idx) => ({...p, unique: idx, currentHP: p.hp})) : null}
-          />}/>
+          <Route exact path="/battle" 
+            render={() => 
+              <Battle 
+                currentUser={this.state.currentUser}
+                currentTeam={this.state.currentTeam}
+                battling={this.state.battling}
+                handleBattleStart={this.handleBattleStart}
+                allPokemon={this.state.allPokemon}
+                moves={this.state.moves}
+                updateTrainer={this.updateTrainer}
+              />}/>
         </div>
       </Router>
     )

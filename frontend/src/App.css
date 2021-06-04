@@ -67,7 +67,7 @@ fieldset {
   width: 30px;
   height: 30px;
 }
-.login-form, .profile, .signup, .home{
+.login-form, .profile, .signup{
   padding-top: 80px;
 }
 
@@ -325,17 +325,212 @@ textarea {
   margin-bottom: auto;
 }
 
+.battle-container {
+  height: 100%;
+  width: 100%;
+}
+
 .pokemon-battle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 65px;
   border: 1px solid black;
-  width: 90%;
+  width: 95%;
   height: 65%;
   background: white;
 }
 
+.your-team, .enemy-team  {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+}
+
+.enemy-container {
+  display: flex;
+}
+
+.enemy-pokemon {
+  margin-left: auto;
+  margin-right: 50px;
+  margin-top: 50px;
+}
+
+.your-pokemon {
+  align-self: flex-end;
+}
+
+.your-pokemon img{
+  margin-left: 75px;
+  margin-bottom: 75px;
+}
+
+.your-container {
+  display: flex;
+  width: 100%;
+  margin-top: auto;
+  height: 100%;
+}
+
+.your-moves {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  align-self: flex-end;
+  height: 100%;
+  width: 70vh;
+}
+
+.move-table {
+  border: 1px solid white;
+  width: 60vh;
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.move-table th{
+  height: 50px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.switch-pokemon {
+  margin-left: auto;
+  margin-right: 9px;
+  width: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.switch-sprites {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.enemy-switch {
+  width: 70%;
+}
+
+.switch-pokemon img, .enemy-switch img {
+  margin-left: 10px;
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
 .chatbox {
   border: 1px solid black;
-  width: 90%;
+  width: 95%;
   height: 20%;
   background: white;
+  overflow-y: scroll;
+}
+
+.chatbox ul {
+  list-style: none;
+}
+
+.chatbox li {
+  margin-bottom: 5px;
+}
+
+.chatbox li:nth-child(even) {
+  color: red;
+}
+
+.chatbox li:nth-child(odd) {
+  color: blue;
+}
+
+
+.your-pokemon img, .enemy-pokemon img{
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+  -webkit-transform: scale(2);
+  transform: scale(2);
+}
+
+.your-health {
+ border: 1px solid black;
+ height: 20px;
+ width: 40vh;
+ margin-left: 20px;
+ margin-right: 20px;
+}
+
+.pokemon-health {
+  height: 100%;
+}
+
+.health-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.enemy-health {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.active-move {
+  background: black;
+  color: white;
+}
+
+.switch-pokemon button, .switch-pokemon img {
+  cursor: pointer;
+}
+
+.switch-pokemon button {
+  margin-left: 20px;
+}
+
+.switch-pokemon .active-pokemon {
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.play-again {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.lose {
+  background-image: url("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2019/05/21e1dd6fa62529babb8665a911e19a7d.jpg");
+}
+
+.win {
+  background-image: url("https://wallpapercave.com/wp/VHH1EMf.jpg");
+}
+
+.play-again h2 {
+  margin-top: 10vh;
+  font-size: 50px;
+}
+
+.play-again button {
+  margin-bottom: 25vh;
+}
+
+.home {
+  height: 100vh;
+  background-image: url("https://wallpaperaccess.com/full/20997.jpg");
+  background-size: cover;
+  background-position: center;
 }
