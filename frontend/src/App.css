@@ -93,6 +93,11 @@ fieldset {
   max-width: 1200px;
 }
 
+.pokemon-container form {
+  align-self: center;
+  justify-self: center;
+}
+
 .pokemon-card {
   display: flex;
   flex-direction: column;
@@ -384,7 +389,7 @@ textarea {
 
 .move-table {
   border: 1px solid white;
-  width: 60vh;
+  width: 50vh;
   margin-left: auto;
   margin-right: 15px;
 }
@@ -411,6 +416,8 @@ textarea {
 }
 
 .enemy-switch {
+  display: flex;
+  flex-direction: column;
   width: 70%;
 }
 
@@ -476,6 +483,7 @@ textarea {
 
 .enemy-health {
   display: flex;
+  margin-top: auto;
   align-items: center;
   margin-left: 5px;
 }
