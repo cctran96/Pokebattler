@@ -2,7 +2,7 @@ import React from "react";
 
 const ViewPokemon = ({pokemon, typeImg, viewInfo, addToTeam, teamInProcess, moves}) => {
     const name = pokemon.name === "mr. mime" ? pokemon.name.split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join(" ") : pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
-    const img = `https://www.cpokemon.com/pokes/pokemon-artwork/${pokemon.id}.png`
+    const img = pokemon.name === "greninja" ? "https://i.pinimg.com/originals/ce/3a/24/ce3a24a0a0cb28981a55cc034e064760.png" : `https://www.cpokemon.com/pokes/pokemon-artwork/${pokemon.id}.png`
     const moveNames = pokemon.moves.split(", ").map(move => move.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(' '))
     const moveTypes = pokemon.moves.split(", ").map(move => moves.find(m => m.name === move).move_type)
 

@@ -2,6 +2,7 @@ Trainer.destroy_all
 Team.destroy_all
 Pokemon.destroy_all
 
+
 chau = Trainer.create(name: "Pokemon Master Chau", username: "chautran", password: "password", wins: 999, losses: 0, bio: "I say you too when the waiter tells me to enjoy my food.", sprite: "Hilbert 2")
 jasper = Trainer.create(name: "Pokemon Master Jasper", username: "jasperreed", password: "password", wins: 999, losses: 0, bio: "Cupid shuffle!", sprite: "Hoopster")
 
@@ -10,11 +11,13 @@ Team.create(name: "Ice in my veins", trainer: chau, team: "articuno, dewgong, jy
 Team.create(name: "OG", trainer: chau, team: "blastoise, venusaur, charizard, pikachu, gengar, snorlax")
 Team.create(name: "Those that resemble me", trainer: chau, team: "snorlax, chansey, muk, drowzee, slowbro, dragonite")
 Team.create(name: "1-2-1-2-1-2", trainer: chau, team: "mew, mewtwo, mew, mewtwo, mew, mewtwo")
-Team.create(name: "Uno Dos Tres", trainer: jasper, team: "articuno, zapdos, moltres")
+Team.create(name: "Leap Frog", trainer: chau, team: "greninja, greninja, greninja, greninja, greninja, greninja")
+Team.create(name: "Uno Dos Tres", trainer: jasper, team: "articuno, zapdos, moltres, meganium, feraligatr, typhlosion")
 Team.create(name: "Buff like me", trainer: jasper, team: "machamp, machoke, poliwrath, hitmonchan, hitmonlee, nidoking")
 Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon")
 Team.create(name: "Cupid shuffle", trainer: jasper, team: "jynx, clefairy, clefable, wigglytuff, jigglypuff, mr. mime")
 Team.create(name: "Undefeated", trainer: jasper, team: "mewtwo, mew, dragonite, articuno, zapdos, moltres")
+
 
 Pokemon.create(name: "bulbasaur", types: "grass, poison", hp: 231, atk: 134, def: 134, sp_a: 166, sp_d: 166, spd: 126, moves: "leaf-storm, sludge-bomb, energy-ball, body-slam")
 Pokemon.create(name: "ivysaur", types: "grass, poison", hp: 261, atk: 160, def: 162, sp_a: 196, sp_d: 196, spd: 156, moves: "leaf-storm, sludge-bomb, energy-ball, body-slam")
@@ -167,7 +170,21 @@ Pokemon.create(name: "dragonair", types: "dragon", hp: 263, atk: 204, def: 166, 
 Pokemon.create(name: "dragonite", types: "dragon", hp: 323, atk: 304, def: 226, sp_a: 236, sp_d: 236, spd: 196, moves: "dragon-claw, body-press, earthquake, ice-punch")
 Pokemon.create(name: "mewtwo", types: "psychic", hp: 353, atk: 256, def: 216, sp_a: 344, sp_d: 216, spd: 296, moves: "psystrike, shadow-ball, thunder, aura-sphere")
 Pokemon.create(name: "mew", types: "psychic", hp: 341, atk: 236, def: 236, sp_a: 236, sp_d: 236, spd: 236, moves: "overheat, focus-blast, gunk-shot, psychic")
+Pokemon.create(name: "chikorita", types: "grass", hp: 231, atk: 134, def: 166, sp_a: 134, sp_d: 166, spd: 126, moves: "energy-ball, round, leaf-storm, body-slam")
+Pokemon.create(name: "bayleef", types: "grass", hp: 261, atk: 160, def: 196, sp_a: 162, sp_d: 196, spd: 156, moves: "energy-ball, body-slam, facade, leaf-storm")
+Pokemon.create(name: "meganium", types: "grass", hp: 301, atk: 200, def: 236, sp_a: 202, sp_d: 236, spd: 196, moves: "petal-dance, earthquake, body-slam, iron-tail")
+Pokemon.create(name: "cyndaquil", types: "fire", hp: 219, atk: 140, def: 122, sp_a: 156, sp_d: 136, spd: 166, moves: "iron-tail, wild-charge, overheat, aerial-ace")
+Pokemon.create(name: "quilava", types: "fire", hp: 257, atk: 164, def: 152, sp_a: 196, sp_d: 166, spd: 196, moves: "iron-tail, wild-charge, overheat, aerial-ace")
+Pokemon.create(name: "typhlosion", types: "fire", hp: 297, atk: 204, def: 192, sp_a: 254, sp_d: 206, spd: 236, moves: "wild-charge, overheat, wild-charge, earthquake")
+Pokemon.create(name: "totodile", types: "water", hp: 241, atk: 166, def: 164, sp_a: 124, sp_d: 132, spd: 122, moves: "hydro-pump, dragon-claw, blizzard, aerial-ace")
+Pokemon.create(name: "croconaw", types: "water", hp: 271, atk: 196, def: 196, sp_a: 154, sp_d: 162, spd: 152, moves: "hydro-pump, dragon-claw, blizzard, aerial-ace")
+Pokemon.create(name: "feraligatr", types: "water", hp: 311, atk: 246, def: 236, sp_a: 194, sp_d: 202, spd: 192, moves: "waterfall, dragon-claw, ice-punch, earthquake")
+Pokemon.create(id: 658,name: "greninja", types: "water, dark", hp: 292, atk: 209, def: 177, sp_a: 249, sp_d: 185, spd: 315, moves: "dark-pulse, hydro-cannon, extrasensory, blizzard")
 
+
+Move.create(name: "extrasensory", power: 80, pp: 20, priority: 0, move_class: "special", move_type: "psychic")
+Move.create(name: "hydro-cannon", power: 150, pp: 5, priority: 0, move_class: "special", move_type: "water")
+Move.create(name: "aerial-ace", power: 60, pp: 20, priority: 0, move_class: "physical", move_type: "flying")
 Move.create(name: "dragon-tail", accuracy: 90, power: 60, pp: 10, priority: -6, move_class: "physical", move_type: "dragon")
 Move.create(name: "avalanche", accuracy: 100, power: 60, pp: 10, priority: -4, move_class: "physical", move_type: "ice")
 Move.create(name: "fire-blast", accuracy: 85, power: 110, pp: 5, priority: 0, move_class: "special", move_type: "fire")

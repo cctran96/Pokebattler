@@ -340,16 +340,26 @@ textarea {
   justify-content: center;
   align-items: center;
   margin-top: 65px;
-  border: 1px solid black;
   width: 95%;
   height: 65%;
   background: white;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  border-top: 5px solid black;
+  border-bottom: 2px solid black;
 }
 
 .your-team, .enemy-team  {
   display: flex;
   flex-direction: column;
-  height: 50%;
+}
+
+.your-team {
+  height: 60%;
+}
+
+.enemy-team {
+  height: 40%;
 }
 
 .enemy-container {
@@ -358,8 +368,8 @@ textarea {
 
 .enemy-pokemon {
   margin-left: auto;
-  margin-right: 50px;
-  margin-top: 50px;
+  margin-right: 80px;
+  margin-top: 60px;
 }
 
 .your-pokemon {
@@ -419,10 +429,10 @@ textarea {
   display: flex;
   flex-direction: column;
   width: 70%;
+  height: 20vh;
 }
 
 .switch-pokemon img, .enemy-switch img {
-  margin-left: 10px;
   -moz-transform: scale(0.5);
   -ms-transform: scale(0.5);
   -o-transform: scale(0.5);
@@ -431,11 +441,13 @@ textarea {
 }
 
 .chatbox {
-  border: 1px solid black;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
   width: 95%;
   height: 20%;
-  background: white;
   overflow-y: scroll;
+  background: white;
 }
 
 .chatbox ul {
@@ -464,7 +476,7 @@ textarea {
 }
 
 .your-health {
- border: 1px solid black;
+ border: 3px solid black;
  height: 20px;
  width: 40vh;
  margin-left: 20px;
@@ -473,6 +485,8 @@ textarea {
 
 .pokemon-health {
   height: 100%;
+  transition: 1s ease;
+  transition-delay: 0.5s;
 }
 
 .health-container {
@@ -498,7 +512,7 @@ textarea {
 }
 
 .switch-pokemon button {
-  margin-left: 20px;
+  margin-left: 7vh;
 }
 
 .switch-pokemon .active-pokemon {
@@ -523,7 +537,7 @@ textarea {
   background-image: url("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2019/05/21e1dd6fa62529babb8665a911e19a7d.jpg");
 }
 
-.win {
+.won {
   background-image: url("https://wallpapercave.com/wp/VHH1EMf.jpg");
 }
 
@@ -541,4 +555,53 @@ textarea {
   background-image: url("https://wallpaperaccess.com/full/20997.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.greninja {
+  width: 70px;
+}
+
+.your-moves h3 {
+  margin-left: auto;
+  margin-right: 5vh;
+}
+
+.enemy-switch h3 {
+  margin-left: 5vh;
+}
+
+#greninja {
+  -moz-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+.enemy-sprites {
+  margin-left: 10px;
+}
+
+.play-again button, .start-btn {
+  color: red;
+  height: 6vh;
+  width: 10vh;
+  background: black;
+  transition: 0.5s;
+  font-size: 2vh;
+}
+
+.play-again button:hover, .start-btn:hover {
+  color: black;
+  background: red;
+}
+
+#start-img {
+  background-image: url("https://ssb.wiki.gallery/images/thumb/7/73/SSBU-Pok%C3%A9mon_Stadium_2.png/1200px-SSBU-Pok%C3%A9mon_Stadium_2.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.battle h1 {
+  color: white;
 }

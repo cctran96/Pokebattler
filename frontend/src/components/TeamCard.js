@@ -9,7 +9,7 @@ const TeamCard = ({pokemon, viewInfo, typeImg}) => {
                 <button onClick={() => viewInfo(pokemon)}>i</button>
             </div>
             <h4>{name}</h4>
-            <img src={front(pokemon)} alt={pokemon.name}/>
+            <img className={pokemon.name === "greninja" ? "greninja" : null} src={front(pokemon)} alt={pokemon.name}/>
             <div className="type-container">
                 {pokemon.types.split(", ").map(type => <img key={pokemon.name + type} src={typeImg[type]} alt={type}/>)}
             </div>
@@ -21,6 +21,8 @@ export default TeamCard
 
 const front = pokemon => {
     switch(pokemon.name) {
+        case "greninja":
+            return "https://www.pokencyclopedia.info/sprites/3ds/ani_7_shiny/3ani_-S_658-ash__sm.gif"
         case "nidoran-♂":
             return `https://img.pokemondb.net/sprites/black-white/anim/normal/nidoran-m.gif`
         case "nidoran-♀":

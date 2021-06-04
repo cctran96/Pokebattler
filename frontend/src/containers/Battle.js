@@ -92,7 +92,7 @@ class Battle extends Component {
     yourTeamCheck = () => {
         const filtered = this.state.yourTeam.filter(p => p.currentHP > 0)
         if (filtered.length === 0) {
-            this.setState({loss: true})
+            setTimeout(() => this.setState({loss: true}),3000)
             const config = {
                 method: "PATCH",
                 headers: {
@@ -142,22 +142,23 @@ class Battle extends Component {
                 let yourHp = you.currentHP - enemyDmg
                 let yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
                 let message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName}${effectiveness(type(you, enemyMove))} (Dealt ${enemyDmg})`]
-                if (hpChange > 0) {    
-                    this.setState({
-                        yourCurrent: yourObj,
-                        yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                        log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
-                    }, () => {
-                        this.yourTeamCheck()
-                    })
-                } else {
-                    if (this.enemySwitch()) {
-                    this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})})
+                setTimeout(() => {
+                    if (hpChange > 0) {    
+                        this.setState({
+                            yourCurrent: yourObj,
+                            yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
+                            log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
+                        }, () => {
+                            this.yourTeamCheck()
+                        })
                     } else {
-                        this.setState({won: true})
-                        this.updateWin()
-                    }
-                }
+                        if (this.enemySwitch()) {
+                        setTimeout(() => this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})}), 3000)
+                        } else {
+                            this.setState({won: true})
+                            this.updateWin()
+                        }
+                    }}, 3000)
             })
         } else {
             let yourHp = you.currentHP - enemyDmg
@@ -173,25 +174,24 @@ class Battle extends Component {
                 let enemyObj = {...enemy, currentHP: hpChange > 0 ? hpChange : 0}
                 let message = [...this.state.log, `Your ${yourName} used ${formattedMove(selectedMove)} on the opponent's ${enemyName}${effectiveness(type(enemy, move))} (Dealt ${moveDmg})`]
                 this.setState({selectedMove: null})
-                if (yourHp > 0) {
-                    this.setState({
-                        enemyCurrent: enemyObj,
-                        enemyTeam: this.state.enemyTeam.map(p => p.unique === enemyObj.unique ? enemyObj : p),
-                        log: hpChange > 0 ? message : [...message, `The opponent's ${enemyName} has fainted.`],
-                        won: this.enemySwitch() ? null : true
-                    }, () => {
-                        if (hpChange > 0) {
-                            return
-                        }
-                        if (this.enemySwitch()) {
-                            
-                            this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})})
-                        } else {
-                            this.setState({won: true})
-                            this.updateWin()
-                        }
-                    })
-                }
+                setTimeout(() => {
+                    if (yourHp > 0) {
+                        this.setState({
+                            enemyCurrent: enemyObj,
+                            enemyTeam: this.state.enemyTeam.map(p => p.unique === enemyObj.unique ? enemyObj : p),
+                            log: hpChange > 0 ? message : [...message, `The opponent's ${enemyName} has fainted.`],
+                        }, () => {
+                            if (hpChange > 0) {
+                                return
+                            }
+                            if (this.enemySwitch()) { 
+                                setTimeout(() => this.setState({enemyCurrent: this.enemySwitch()}, () => {this.setState({log: [...this.state.log, `The opponent sends out their ${pokemonName(this.state.enemyCurrent)}`]})}), 3000)
+                            } else {
+                                this.setState({won: true})
+                                this.updateWin()
+                            }
+                        })
+                    }}, 3000)
             })
         }
     }
@@ -224,13 +224,14 @@ class Battle extends Component {
                 const yourHp = you.currentHP - enemyDmg
                 const yourObj = {...you, currentHP: yourHp > 0 ? yourHp : 0}
                 const message = [...this.state.log, `The opponent's ${enemyName} used ${formattedMove(selectedEnemyMove)} on your ${yourName} while it switched in${effectiveness(type(you, enemyMove))} (Dealt ${enemyDmg})`]
-                this.setState({
-                    yourCurrent: yourObj,
-                    yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                    log: yourHp > 0 ? message : [...message, `Your ${pokemonName(this.state.yourCurrent)} has fainted.`]
-                }, () => {
-                    this.yourTeamCheck()
-                })
+                setTimeout(() => {
+                    this.setState({
+                        yourCurrent: yourObj,
+                        yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
+                        log: yourHp > 0 ? message : [...message, `Your ${pokemonName(this.state.yourCurrent)} has fainted.`]
+                    }, () => {
+                        this.yourTeamCheck()
+                    })}, 2000)
             })
         }
     }
@@ -250,15 +251,15 @@ class Battle extends Component {
             <div className="battle">
                 {this.props.currentUser ? 
                 <>
-                    <div className="pokemon-battle">
-                        {this.state.loss ? <div className="play-again lose"><h2>You lost!</h2><button onClick={this.playAgain}>Play Again</button></div> : (this.state.won ? <div className="play-again win"><h2>You won!</h2><button onClick={this.playAgain}>Play Again</button></div> :
+                    <div id={!this.state.battling && !this.state.yourCurrent ? "start-img" : null} className="pokemon-battle">
+                        {this.state.loss || this.state.won ? <div className={this.state.won ? "play-again won" : "play-again lose"}><h2>{this.state.won ? "You won!" : "You lost!"}</h2><h3>Wins: {this.props.currentUser.wins}</h3><h3>Losses: {this.props.currentUser.losses}</h3><button onClick={this.playAgain}>Play Again</button></div> : 
                         (this.props.battling && this.state.yourCurrent ?
                         <div className="battle-container">
                             <div className="enemy-team">
                                 {this.state.enemyCurrent ?
                                 <div className="enemy-container">
                                     <div className="enemy-switch">
-                                        <div>
+                                        <div className="enemy-sprites">
                                             {this.state.enemyTeam.filter(p => p.currentHP > 0 && this.state.enemyCurrent.unique !== p.unique).map(pokemon => <img className={pokemon.unique} key={pokemon.unique} src={front(pokemon)} alt={pokemon}/>)}
                                         </div>
                                         <div className="enemy-health">
@@ -267,9 +268,10 @@ class Battle extends Component {
                                             </div>
                                             <p>{`${this.state.enemyCurrent.currentHP} / ${this.state.enemyCurrent.hp}`}</p>
                                         </div>
+                                        <h3>{pokemonName(this.state.enemyCurrent)}</h3>
                                     </div>
                                     <div className="enemy-pokemon">
-                                        <img src={front(this.state.enemyCurrent)} alt={this.state.enemyCurrent.name}/>
+                                        <img id={this.state.enemyCurrent.name === "greninja" ? "greninja" : null} src={front(this.state.enemyCurrent)} alt={this.state.enemyCurrent.name}/>
                                     </div>
                                 </div>: null}
                             </div>
@@ -277,9 +279,10 @@ class Battle extends Component {
                                 {this.state.yourCurrent ?
                                     <div className="your-container">
                                         <div className="your-pokemon">
-                                            <img src={back(this.state.yourCurrent)} alt={this.state.yourCurrent.name}/>
+                                            <img id={this.state.yourCurrent.name === "greninja" ? "greninja" : null} src={back(this.state.yourCurrent)} alt={this.state.yourCurrent.name}/>
                                         </div>
                                         <div className="your-moves">
+                                            <h3>{pokemonName(this.state.yourCurrent)}</h3>
                                             <div className="health-container">
                                                 <p>{`${this.state.yourCurrent.currentHP} / ${this.state.yourCurrent.hp}`}</p>
                                                 <div className="your-health">
@@ -307,7 +310,7 @@ class Battle extends Component {
                                         </div>
                                     </div>: null}
                             </div>
-                        </div> : <button onClick={this.startBattle}>Start Battle</button>))}
+                        </div> : (this.props.currentTeam ? <button className="start-btn" onClick={this.startBattle}>Start Battle</button> : <h1>You have no team!</h1>))}
                     </div>
                     <div className="chatbox">
                         <ul>
@@ -325,6 +328,8 @@ export default Battle
 
 const front = pokemon => {
     switch(pokemon.name) {
+        case "greninja":
+            return "https://www.pokencyclopedia.info/sprites/3ds/ani_7_shiny/3ani_-S_658-ash__sm.gif"
         case "nidoran-♂":
             return `https://img.pokemondb.net/sprites/black-white/anim/normal/nidoran-m.gif`
         case "nidoran-♀":
@@ -340,6 +345,8 @@ const front = pokemon => {
 
 const back = pokemon => {
     switch(pokemon.name) {
+        case "greninja": 
+            return "https://www.pokencyclopedia.info/sprites/3ds/ani-b_7_shiny/3a-b_-S_658-ash__sm.gif"
         case "nidoran-♂":
             return `https://img.pokemondb.net/sprites/black-white/anim/back-normal/nidoran-m.gif`
         case "nidoran-♀":

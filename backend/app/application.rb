@@ -19,10 +19,10 @@ class Application
     elsif req.path.match(/trainers/) && req.post?
       data = JSON.parse(req.body.read)
       trainer = Trainer.create(data)
-      return [200, {'Content-Type' => 'application/json' }, [{:trainer => trainer}.to_json]]
+      return [200, {'Content-Type' => 'application/json' }, [{:trainer => Trainer.without_pw.find(trainer.id)}.to_json]]
     elsif req.path.match(/login/) && req.post?
       user = JSON.parse(req.body.read)
-      found = Trainer.without_pw(user)
+      found = Trainer.without_pw.find_by(user)
       if found
         return [200, { 'Content-Type' => 'application/json' }, [{:trainer => found, :teams => found.teams}.to_json]]
       else
