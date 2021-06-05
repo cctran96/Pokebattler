@@ -282,6 +282,8 @@ textarea {
   background-image: url("https://media.timeout.com/images/105678963/image.jpg");
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .sprite {
@@ -307,9 +309,9 @@ textarea {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 25%;
   font-weight: bold;
   font-size: 20px;
+  margin-top: auto;
 }
 
 .me img {

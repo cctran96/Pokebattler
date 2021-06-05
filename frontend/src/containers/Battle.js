@@ -14,7 +14,8 @@ class Battle extends Component {
         selectedMove: null,
         selectedPokemon: null,
         won: null,
-        loss: null
+        loss: null,
+        turnEnd: true
     }
 
     componentDidUpdate(_, prevState) {
@@ -65,12 +66,12 @@ class Battle extends Component {
     }
     
     selectMove = e => {
-        this.state.yourCurrent.currentHP === 0 ? alert("Your pokemon has fainted! Please choose another pokemon.") :
-        this.setState({selectedMove: e.target.id, selectedPokemon: null})
+        this.state.turnEnd ? (this.state.yourCurrent.currentHP === 0 ? alert("Your pokemon has fainted! Please choose another pokemon.") :
+        this.setState({selectedMove: e.target.id, selectedPokemon: null})) : console.log()
     }
     
     selectPokemon = e => {
-        this.setState({selectedPokemon: e.target.name, selectedMove: null})
+        this.state.turnEnd ? this.setState({selectedPokemon: e.target.name, selectedMove: null}) : console.log()
     }
     
     moveDamage = (attacker, defender, selectedMove) => {
@@ -137,6 +138,7 @@ class Battle extends Component {
                 enemyCurrent: enemyObj,
                 enemyTeam: this.state.enemyTeam.map(p => p.unique === enemyObj.unique ? enemyObj : p),
                 log: hpChange > 0 ? message : [...message, `The opponent's ${enemyName} has fainted.`],
+                turnEnd: false
             }, () => {
                 this.setState({selectedMove: null})
                 let yourHp = you.currentHP - enemyDmg
@@ -158,7 +160,9 @@ class Battle extends Component {
                             this.setState({won: true})
                             this.updateWin()
                         }
-                    }}, 3000)
+                    }
+                    setTimeout(() => {this.setState({turnEnd: true})}, 2000)
+                }, 2000)
             })
         } else {
             let yourHp = you.currentHP - enemyDmg
@@ -167,7 +171,8 @@ class Battle extends Component {
             this.setState({
                 yourCurrent: yourObj,
                 yourTeam: this.state.yourTeam.map(p => p.unique === yourObj.unique ? yourObj : p),
-                log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`]
+                log: yourHp > 0 ? message : [...message, `Your ${yourName} has fainted.`],
+                turnEnd: false
             }, () => {
                 this.yourTeamCheck()
                 let hpChange = enemy.currentHP - moveDmg
@@ -190,8 +195,9 @@ class Battle extends Component {
                                 this.setState({won: true})
                                 this.updateWin()
                             }
-                        })
-                    }}, 3000)
+                        }, () => {this.setState({turnEnd: true})})
+                    }
+                }, 3000)
             })
         }
     }
@@ -211,7 +217,8 @@ class Battle extends Component {
             this.setState({
                 yourCurrent: switching,
                 selectedPokemon: null,
-                log: [...this.state.log,`${randReturn}${pokemonName(this.state.yourCurrent)}. ${randSummon}${pokemonName(switching)}!`]
+                log: [...this.state.log,`${randReturn}${pokemonName(this.state.yourCurrent)}. ${randSummon}${pokemonName(switching)}!`],
+                turnEnd: false
             }, () => {
                 const enemy = this.state.enemyCurrent
                 const enemyName = pokemonName(enemy)
@@ -231,6 +238,7 @@ class Battle extends Component {
                         log: yourHp > 0 ? message : [...message, `Your ${pokemonName(this.state.yourCurrent)} has fainted.`]
                     }, () => {
                         this.yourTeamCheck()
+                        this.setState({turnEnd: true})
                     })}, 2000)
             })
         }
