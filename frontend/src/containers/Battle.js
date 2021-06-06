@@ -161,7 +161,7 @@ class Battle extends Component {
                             this.updateWin()
                         }
                     }
-                    setTimeout(() => {this.setState({turnEnd: true})}, 2000)
+                    setTimeout(() => {this.setState({turnEnd: true})}, 3000)
                 }, 2000)
             })
         } else {
@@ -195,9 +195,10 @@ class Battle extends Component {
                                 this.setState({won: true})
                                 this.updateWin()
                             }
-                        }, () => {this.setState({turnEnd: true})})
+                        })
                     }
-                }, 3000)
+                    setTimeout(() => {this.setState({turnEnd: true})}, 3000)
+                }, 2000)
             })
         }
     }
@@ -238,7 +239,7 @@ class Battle extends Component {
                         log: yourHp > 0 ? message : [...message, `Your ${pokemonName(this.state.yourCurrent)} has fainted.`]
                     }, () => {
                         this.yourTeamCheck()
-                        this.setState({turnEnd: true})
+                        setTimeout(() => {this.setState({turnEnd: true})}, 3000)
                     })}, 2000)
             })
         }
