@@ -6,14 +6,12 @@ Pokemon.destroy_all
 chau = Trainer.create(name: "Pokemon Master Chau", username: "chautran", password: "password", wins: 999, losses: 0, bio: "I say you too when the waiter tells me to enjoy my food.", sprite: "Hilbert 2")
 jasper = Trainer.create(name: "Pokemon Master Jasper", username: "jasperreed", password: "password", wins: 999, losses: 0, bio: "Cupid shuffle!", sprite: "Hoopster")
 
-Team.create(name: "Go fish", trainer: chau, team: "magikarp, magikarp, magikarp, magikarp, magikarp, magikarp")
 Team.create(name: "Ice in my veins", trainer: chau, team: "articuno, dewgong, jynx, lapras, gyarados, blastoise")
 Team.create(name: "OG", trainer: chau, team: "blastoise, venusaur, charizard, pikachu, gengar, snorlax")
 Team.create(name: "Those that resemble me", trainer: chau, team: "snorlax, chansey, muk, drowzee, slowbro, dragonite")
-Team.create(name: "1-2-1-2-1-2", trainer: chau, team: "mew, mewtwo, mew, mewtwo, mew, mewtwo")
 Team.create(name: "Uno Dos Tres", trainer: jasper, team: "articuno, zapdos, moltres, meganium, feraligatr, typhlosion")
 Team.create(name: "Buff like me", trainer: jasper, team: "machamp, machoke, poliwrath, hitmonchan, hitmonlee, nidoking")
-Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon, greninja")
+Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon, greninja, venusaur, dragonite")
 Team.create(name: "Cupid shuffle", trainer: jasper, team: "jynx, clefairy, clefable, wigglytuff, jigglypuff, mr. mime")
 Team.create(name: "Undefeated", trainer: jasper, team: "mewtwo, mew, dragonite, articuno, zapdos, moltres")
 
