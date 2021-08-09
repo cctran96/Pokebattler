@@ -11,7 +11,7 @@ Team.create(name: "OG", trainer: chau, team: "blastoise, venusaur, charizard, pi
 Team.create(name: "Those that resemble me", trainer: chau, team: "snorlax, chansey, muk, drowzee, slowbro, dragonite")
 Team.create(name: "Uno Dos Tres", trainer: jasper, team: "articuno, zapdos, moltres, meganium, feraligatr, typhlosion")
 Team.create(name: "Buff like me", trainer: jasper, team: "machamp, machoke, poliwrath, hitmonchan, hitmonlee, nidoking")
-Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon, greninja, venusaur, dragonite")
+Team.create(name: "Eeveelution", trainer: jasper, team: "eevee, vaporeon, jolteon, flareon, greninja, venusaur")
 Team.create(name: "Cupid shuffle", trainer: jasper, team: "jynx, clefairy, clefable, wigglytuff, jigglypuff, mr. mime")
 Team.create(name: "Undefeated", trainer: jasper, team: "mewtwo, mew, dragonite, articuno, zapdos, moltres")
 
