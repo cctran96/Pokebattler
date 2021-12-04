@@ -136,7 +136,7 @@ class App extends Component {
 export default App;
 
 const typeImg = {
-  normal: "https://cdn2.bulbagarden.net/upload/e/e4/NormalIC.gif",
+  normal: "https://archives.bulbagarden.net/media/upload/3/39/NormalIC_Big.png",
   fight: "https://cdn2.bulbagarden.net/upload/8/8e/FightingIC.gif",
   flying: "https://cdn2.bulbagarden.net/upload/7/73/FlyingIC.gif",
   poison: "https://cdn2.bulbagarden.net/upload/7/71/PoisonIC.gif",
